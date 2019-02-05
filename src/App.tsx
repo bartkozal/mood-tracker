@@ -1,21 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { createAppContainer, createBottomTabNavigator } from "react-navigation";
+import CalendarScreen from "./screens/CalendarScreen";
+import StatsScreen from "./screens/StatsScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
+const TabNavigator = createBottomTabNavigator({
+  Calendar: CalendarScreen,
+  Stats: StatsScreen,
+  Settings: SettingsScreen
 });
+
+export default createAppContainer(TabNavigator);
