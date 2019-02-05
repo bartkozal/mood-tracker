@@ -1,12 +1,11 @@
-import React from "react";
 import { createAppContainer, createBottomTabNavigator } from "react-navigation";
-import CalendarScreen from "./screens/CalendarScreen";
-import StatsScreen from "./screens/StatsScreen";
+import MainScreen from "./screens/MainScreen";
+import AnalyticsScreen from "./screens/AnalyticsScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 
 const TabNavigator = createBottomTabNavigator({
-  Calendar: CalendarScreen,
-  Stats: StatsScreen,
+  Main: MainScreen,
+  Analytics: AnalyticsScreen,
   Settings: SettingsScreen
 });
 
