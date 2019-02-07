@@ -1,7 +1,9 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { DateTime, Info } from "luxon";
 import _ from "lodash";
+import { View, StyleSheet } from "react-native";
+import { DateTime, Info } from "luxon";
+import Header from "./Text/Header";
+import Body from "./Text/Body";
 
 interface Props {
   year: number;
@@ -21,11 +23,11 @@ export default class Calendar extends React.Component<Props> {
 
       return (
         <View key={monthName}>
-          <Text>{monthName}</Text>
+          <Header>{monthName}</Header>
           <View style={styles.daysInMonthView}>
-            {_.times(daysInMonth, i => (
-              <View key={i} style={styles.dayView}>
-                <Text>{i + 1}</Text>
+            {_.times(daysInMonth, n => (
+              <View key={n} style={styles.dayView}>
+                <Body>{n + 1}</Body>
               </View>
             ))}
           </View>
