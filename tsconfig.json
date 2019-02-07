@@ -4,6 +4,7 @@
     "module": "esnext",
     "jsx": "react-native",
     "allowSyntheticDefaultImports": true,
-    "strict": true
+    "strict": true,
+    "lib": ["es2017"]
   }
 }
