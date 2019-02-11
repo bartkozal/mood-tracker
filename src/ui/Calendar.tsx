@@ -52,7 +52,7 @@ export default class Calendar extends React.Component<Props> {
                     : null)
                 }}
               >
-                <Body>{day + 1}</Body>
+                <Body>{day}</Body>
               </View>
             ))}
           </View>
