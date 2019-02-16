@@ -5,12 +5,11 @@ import Month from "./Month";
 
 interface Props {
   year: number;
-  onDayPress: (day: number) => void;
 }
 
 export default class Calendar extends React.Component<Props> {
   render() {
-    const { year, onDayPress } = this.props;
+    const { year } = this.props;
     const monthNames = Info.months("short");
 
     return (
@@ -32,7 +31,6 @@ export default class Calendar extends React.Component<Props> {
               name={monthName}
               numberOfDays={numberOfDays}
               firstWeekday={firstWeekday}
-              onDayPress={onDayPress}
             />
           );
         })}

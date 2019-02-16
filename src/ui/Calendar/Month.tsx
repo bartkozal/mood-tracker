@@ -11,7 +11,6 @@ interface Props {
   name: string;
   numberOfDays: number;
   firstWeekday: number;
-  onDayPress: (day: number) => void;
 }
 
 const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
@@ -19,7 +18,7 @@ const WEEKDAY_VIEW_WIDTH = 100 / WEEKDAYS.length;
 
 export default class Month extends React.Component<Props> {
   render() {
-    const { name, numberOfDays, firstWeekday, onDayPress } = this.props;
+    const { name, numberOfDays, firstWeekday } = this.props;
 
     return (
       <View>
@@ -44,7 +43,7 @@ export default class Month extends React.Component<Props> {
                   : null)
               }}
             >
-              <Day day={day} onPress={onDayPress} />
+              <Day day={day} />
             </View>
           ))}
         </View>
