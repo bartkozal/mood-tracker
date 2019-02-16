@@ -7,8 +7,8 @@ export default class Popover extends React.Component {
       <View
         style={{
           position: "absolute",
-          top: 135,
-          left: 50,
+          top: 0,
+          left: 0,
           backgroundColor: "#FFFFFF",
           padding: 8,
           shadowColor: "#000",
