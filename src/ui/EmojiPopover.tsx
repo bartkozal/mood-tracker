@@ -20,7 +20,7 @@ export default class EmojiPopover extends React.Component<Props> {
         placement="bottom"
         showBackground={false}
         popoverStyle={styles.popover}
-        animationConfig={{ duration: 200 }}
+        animationConfig={{ duration: 100 }}
       >
         <Text>😀🙃😎</Text>
       </Popover>

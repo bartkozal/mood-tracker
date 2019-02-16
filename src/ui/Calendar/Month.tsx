@@ -28,7 +28,7 @@ export default class Month extends React.Component<Props> {
 
         <View style={styles.monthDaysView}>
           {WEEKDAYS.map(weekday => (
-            <View key={weekday} style={styles.weekdaysView}>
+            <View key={weekday} style={styles.weekdayView}>
               <Subheader color={Color.Gray}>{weekday}</Subheader>
             </View>
           ))}
@@ -57,7 +57,7 @@ export default class Month extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   monthView: {
-    marginBottom: 24
+    marginBottom: 16
   },
   monthNameView: {
     marginBottom: 16
@@ -66,11 +66,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap"
   },
-  weekdaysView: {
+  weekdayView: {
     flexBasis: toPercentage(WEEKDAY_VIEW_WIDTH),
+    alignItems: "center",
     marginBottom: 8
   },
   dayView: {
-    flexBasis: toPercentage(WEEKDAY_VIEW_WIDTH)
+    flexBasis: toPercentage(WEEKDAY_VIEW_WIDTH),
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 8
   }
 });
