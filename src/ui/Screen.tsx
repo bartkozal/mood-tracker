@@ -9,7 +9,9 @@ export default class Screen extends React.Component {
       <SafeAreaView>
         <LinearGradient
           colors={Gradient.Background}
-          style={{ minHeight: "100%" }}
+          style={{
+            minHeight: "100%"
+          }}
         >
           {this.props.children}
         </LinearGradient>

@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { DateTime, Info } from "luxon";
 import Title from "../Text/Title";
 import Month from "./Month";
@@ -14,7 +15,14 @@ export default class Calendar extends React.Component<Props> {
 
     return (
       <>
-        <Title>{year}</Title>
+        <View
+          style={{
+            padding: 16,
+            alignItems: "center"
+          }}
+        >
+          <Title>{year}</Title>
+        </View>
 
         {monthNames.map(monthName => {
           const month = monthNames.indexOf(monthName) + 1;

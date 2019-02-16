@@ -21,11 +21,14 @@ export default class Month extends React.Component<Props> {
     const { name, numberOfDays, firstWeekday } = this.props;
 
     return (
-      <View>
-        <Header>{name}</Header>
-        <View style={styles.monthView}>
+      <View style={styles.monthView}>
+        <View style={styles.monthNameView}>
+          <Header>{name.toUpperCase()}</Header>
+        </View>
+
+        <View style={styles.monthDaysView}>
           {WEEKDAYS.map(weekday => (
-            <View key={weekday} style={styles.weekdayView}>
+            <View key={weekday} style={styles.weekdaysView}>
               <Subheader color={Color.Gray}>{weekday}</Subheader>
             </View>
           ))}
@@ -54,11 +57,18 @@ export default class Month extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   monthView: {
+    marginBottom: 24
+  },
+  monthNameView: {
+    marginBottom: 16
+  },
+  monthDaysView: {
     flexDirection: "row",
     flexWrap: "wrap"
   },
-  weekdayView: {
-    flexBasis: toPercentage(WEEKDAY_VIEW_WIDTH)
+  weekdaysView: {
+    flexBasis: toPercentage(WEEKDAY_VIEW_WIDTH),
+    marginBottom: 8
   },
   dayView: {
     flexBasis: toPercentage(WEEKDAY_VIEW_WIDTH)

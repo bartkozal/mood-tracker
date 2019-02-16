@@ -10,7 +10,7 @@ export default class MainScreen extends React.Component {
 
     return (
       <Screen>
-        <ScrollView>
+        <ScrollView style={{ paddingHorizontal: 12 }}>
           <Calendar year={currentYear} />
         </ScrollView>
       </Screen>
