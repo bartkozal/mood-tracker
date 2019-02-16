@@ -30,6 +30,7 @@ export default class EmojiPopover extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   popover: {
+    padding: 8,
     backgroundColor: "red",
     shadowColor: "rgba(0, 0, 0, 0.3)",
     shadowOffset: {

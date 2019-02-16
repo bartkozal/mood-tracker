@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableWithoutFeedback, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Body from "../Text/Body";
 import EmojiPopover from "../EmojiPopover";
 import Color from "../Color";
@@ -13,7 +13,7 @@ export default class Day extends React.Component<Props> {
     isPopoverVisible: false
   };
 
-  dayView = React.createRef<TouchableWithoutFeedback>();
+  dayView = React.createRef<TouchableOpacity>();
 
   setIsPopoverVisible = (isPopoverVisible: boolean) => {
     this.setState({ isPopoverVisible });
@@ -25,14 +25,14 @@ export default class Day extends React.Component<Props> {
 
     return (
       <>
-        <TouchableWithoutFeedback
+        <TouchableOpacity
           onPress={() => this.setIsPopoverVisible(true)}
           ref={this.dayView}
         >
           <View style={styles.dayView}>
             <Body>{day}</Body>
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
 
         <EmojiPopover
           isVisible={isPopoverVisible}
