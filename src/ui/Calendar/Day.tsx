@@ -19,6 +19,7 @@ export default class Day extends React.Component<Props> {
   };
 
   dayView = React.createRef<TouchableOpacity>();
+  now = DateTime.local();
 
   setIsPopoverVisible = (isPopoverVisible: boolean) => {
     this.setState({ isPopoverVisible });
@@ -33,11 +34,11 @@ export default class Day extends React.Component<Props> {
       day
     });
     const isWeekend = isWeekendDay(dayDateTime.weekday);
-
-    const isToday = Interval.fromDateTimes(
-      DateTime.local(),
-      dayDateTime
-    ).hasSame("days");
+    const isToday = DateTime.fromObject({
+      year: this.now.year,
+      month: this.now.month,
+      day: this.now.day
+    }).equals(dayDateTime);
 
     return (
       <>
