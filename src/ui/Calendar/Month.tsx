@@ -8,6 +8,8 @@ import { toPercentage } from "../Distance";
 import Day from "./Day";
 
 interface Props {
+  year: number;
+  month: number;
   name: string;
   numberOfDays: number;
   firstWeekday: number;
@@ -18,7 +20,7 @@ const WEEKDAY_VIEW_WIDTH = 100 / WEEKDAYS.length;
 
 export default class Month extends React.Component<Props> {
   render() {
-    const { name, numberOfDays, firstWeekday } = this.props;
+    const { year, month, name, numberOfDays, firstWeekday } = this.props;
 
     return (
       <View style={styles.monthView}>
@@ -46,7 +48,7 @@ export default class Month extends React.Component<Props> {
                   : null)
               }}
             >
-              <Day day={day} />
+              <Day year={year} month={month} day={day} />
             </View>
           ))}
         </View>

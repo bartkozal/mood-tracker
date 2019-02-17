@@ -36,6 +36,8 @@ export default class Calendar extends React.Component<Props> {
           return (
             <Month
               key={monthName}
+              year={year}
+              month={month}
               name={monthName}
               numberOfDays={numberOfDays}
               firstWeekday={firstWeekday}
