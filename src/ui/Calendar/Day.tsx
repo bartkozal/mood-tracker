@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { DateTime } from "luxon";
+import { DateTime, Interval } from "luxon";
 import Body from "../Text/Body";
 import EmojiPopover from "../EmojiPopover";
 import Color from "../Color";
@@ -34,6 +34,11 @@ export default class Day extends React.Component<Props> {
     });
     const isWeekend = isWeekendDay(dayDateTime.weekday);
 
+    const isToday = Interval.fromDateTimes(
+      DateTime.local(),
+      dayDateTime
+    ).hasSame("days");
+
     return (
       <>
         <TouchableOpacity
@@ -43,7 +48,8 @@ export default class Day extends React.Component<Props> {
           <View
             style={{
               ...styles.dayView,
-              ...(isWeekend ? styles.weekendDayView : null)
+              ...(isWeekend ? styles.weekendDayView : null),
+              ...(isToday ? styles.todayView : null)
             }}
           >
             <Body color={isWeekend ? Color.Red : Color.Ink}>{day}</Body>
@@ -80,5 +86,9 @@ const styles = StyleSheet.create({
   weekendDayView: {
     backgroundColor: Color.Rose,
     shadowColor: "rgba(231, 181, 196, 0.5)"
+  },
+  todayView: {
+    borderColor: Color.Sky,
+    borderWidth: 2
   }
 });
