@@ -1,24 +1,20 @@
 import React from "react";
 import _ from "lodash";
-import {
-  TouchableWithoutFeedback,
-  StyleSheet,
-  View,
-  Image
-} from "react-native";
+import { TouchableOpacity, StyleSheet, View } from "react-native";
 import Popover from "react-native-popover-view";
 import Color from "./Color";
-import Emoji from "./Emoji";
+import Emoji, { EmojiList } from "./Emoji";
 
 interface Props {
   isVisible: boolean;
-  fromView: TouchableWithoutFeedback;
+  fromView: TouchableOpacity;
   onClose: () => void;
+  onPress: (mood: string) => void;
 }
 
 export default class EmojiPopover extends React.Component<Props> {
   render() {
-    const { isVisible, fromView, onClose } = this.props;
+    const { isVisible, fromView, onClose, onPress } = this.props;
 
     return (
       <Popover
@@ -30,10 +26,12 @@ export default class EmojiPopover extends React.Component<Props> {
         popoverStyle={styles.popover}
         animationConfig={{ duration: 100 }}
       >
-        {_.chunk(Object.values(Emoji), 5).map((row, i) => (
+        {_.chunk(EmojiList, 5).map((row, i) => (
           <View key={i} style={styles.emojiRowView}>
-            {row.map((emojiSource, j) => (
-              <Image key={j} style={styles.emoji} source={emojiSource} />
+            {row.map(({ name }) => (
+              <TouchableOpacity key={name} onPress={() => onPress(name)}>
+                <Emoji mood={name} />
+              </TouchableOpacity>
             ))}
           </View>
         ))}
@@ -45,9 +43,6 @@ export default class EmojiPopover extends React.Component<Props> {
 const styles = StyleSheet.create({
   emojiRowView: {
     flexDirection: "row"
-  },
-  emoji: {
-    margin: 8
   },
   popover: {
     padding: 8,

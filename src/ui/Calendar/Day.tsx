@@ -1,8 +1,9 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { DateTime, Interval } from "luxon";
+import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { DateTime } from "luxon";
 import Body from "../Text/Body";
 import EmojiPopover from "../EmojiPopover";
+import Emoji from "../Emoji";
 import Color from "../Color";
 
 interface Props {
@@ -15,7 +16,8 @@ const isWeekendDay = (weekday: number) => [6, 7].includes(weekday);
 
 export default class Day extends React.Component<Props> {
   state = {
-    isPopoverVisible: false
+    isPopoverVisible: false,
+    mood: ""
   };
 
   dayView = React.createRef<TouchableOpacity>();
@@ -25,9 +27,13 @@ export default class Day extends React.Component<Props> {
     this.setState({ isPopoverVisible });
   };
 
+  setMood = (mood: string) => {
+    this.setState({ mood, isPopoverVisible: false });
+  };
+
   render() {
     const { year, month, day } = this.props;
-    const { isPopoverVisible } = this.state;
+    const { mood, isPopoverVisible } = this.state;
     const dayDateTime = DateTime.fromObject({
       year,
       month,
@@ -53,7 +59,11 @@ export default class Day extends React.Component<Props> {
               ...(isToday ? styles.todayView : null)
             }}
           >
-            <Body color={isWeekend ? Color.Red : Color.Ink}>{day}</Body>
+            {mood ? (
+              <Emoji mood={mood} />
+            ) : (
+              <Body color={isWeekend ? Color.Red : Color.Ink}>{day}</Body>
+            )}
           </View>
         </TouchableOpacity>
 
@@ -61,6 +71,7 @@ export default class Day extends React.Component<Props> {
           isVisible={isPopoverVisible}
           fromView={this.dayView.current!}
           onClose={() => this.setIsPopoverVisible(false)}
+          onPress={newMood => this.setMood(newMood)}
         />
       </>
     );
