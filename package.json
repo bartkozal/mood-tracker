@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "lint": "tslint --project tsconfig.json"
+    "lint": "tslint --project tsconfig.json",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "expo": "^32.0.0",
@@ -24,6 +25,8 @@
     "@types/react-native": "^0.57.32",
     "@types/react-navigation": "^3.0.1",
     "babel-preset-expo": "^5.0.0",
+    "patch-package": "^6.0.4",
+    "postinstall-postinstall": "^2.0.0",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",

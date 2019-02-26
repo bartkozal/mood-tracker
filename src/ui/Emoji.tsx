@@ -1,18 +1,25 @@
 import React from "react";
-import { Image, ImageSourcePropType } from "react-native";
+import { Image } from "react-native";
 
 interface Props {
   mood: string;
+  size?: number | null;
 }
 
 export default class Emoji extends React.Component<Props> {
   render() {
-    const { mood } = this.props;
+    const { mood, size } = this.props;
 
     return (
       <Image
         style={{
-          margin: 8
+          margin: 8,
+          ...(size
+            ? {
+                width: size,
+                height: size
+              }
+            : null)
         }}
         source={EmojiList.find(emoji => emoji.name === mood)!.source}
       />

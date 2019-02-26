@@ -1,0 +1,24 @@
+diff --git a/node_modules/react-native-popover-view/src/Popover.js b/node_modules/react-native-popover-view/src/Popover.js
+index f918b54..1649377 100644
+--- a/node_modules/react-native-popover-view/src/Popover.js
++++ b/node_modules/react-native-popover-view/src/Popover.js
+@@ -858,7 +858,18 @@ class Popover extends React.Component {
+             <Animated.View style={backgroundStyle}/>
+           </TouchableWithoutFeedback>
+ 
+-          <View style={{top: 0, left: 0}}>
++          <View style={{
++            top: 0,
++            left: 0,
++            shadowColor: "rgba(0, 0, 0, 0.3)",
++            shadowOffset: {
++              width: 0,
++              height: 0
++            },
++            shadowOpacity: 1,
++            shadowRadius: 30,
++            elevation: 10
++          }}>
+ 
+             <Animated.View style={popoverViewStyle} onLayout={evt => this.measureContent(evt.nativeEvent.layout)}>
+               {this.props.children}

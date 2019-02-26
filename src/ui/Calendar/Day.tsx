@@ -60,7 +60,7 @@ export default class Day extends React.Component<Props> {
             }}
           >
             {mood ? (
-              <Emoji mood={mood} />
+              <Emoji mood={mood} size={isToday ? 42 : null} />
             ) : (
               <Body color={isWeekend ? Color.Red : Color.Ink}>{day}</Body>
             )}

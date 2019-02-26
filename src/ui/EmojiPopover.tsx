@@ -23,6 +23,7 @@ export default class EmojiPopover extends React.Component<Props> {
         onClose={onClose}
         placement="auto"
         showBackground={false}
+        arrowStyle={styles.arrow}
         popoverStyle={styles.popover}
         animationConfig={{ duration: 100 }}
       >
@@ -46,14 +47,10 @@ const styles = StyleSheet.create({
   },
   popover: {
     padding: 8,
-    backgroundColor: Color.Sky,
-    shadowColor: "rgba(0, 0, 0, 0.3)",
-    shadowOffset: {
-      width: 0,
-      height: 0
-    },
-    shadowOpacity: 1,
-    shadowRadius: 30,
-    elevation: 10
+    backgroundColor: Color.White
+  },
+  arrow: {
+    width: 51,
+    height: 25
   }
 });
