@@ -4,6 +4,7 @@ import Color from "../Color";
 
 interface Props {
   color: Color;
+  bold?: boolean;
 }
 
 export default class Body extends React.Component<Props> {
@@ -12,10 +13,16 @@ export default class Body extends React.Component<Props> {
   };
 
   render() {
-    const { color } = this.props;
+    const { color, bold } = this.props;
 
     return (
-      <Text style={{ fontFamily: "Nunito", fontSize: 14, color }}>
+      <Text
+        style={{
+          fontFamily: bold ? "NunitoBold" : "Nunito",
+          fontSize: 14,
+          color
+        }}
+      >
         {this.props.children}
       </Text>
     );

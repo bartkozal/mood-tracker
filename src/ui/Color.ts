@@ -4,7 +4,8 @@ enum Color {
   Gray = "#A9ADB2",
   White = "#FFFFFF",
   Rose = "#FFEBF1",
-  Red = "#FF547F"
+  Red = "#FF547F",
+  Lavender = "#F4F3FF" // not defined in the style guide
 }
 
 export const Gradient = {
