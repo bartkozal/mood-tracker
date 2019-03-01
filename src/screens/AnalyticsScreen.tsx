@@ -11,27 +11,27 @@ export default class AnalyticsScreen extends React.Component {
   render() {
     return (
       <Screen>
-        <View style={styles.topbarView}>
-          <View style={styles.topbarItemView}>
-            <Subheader color={Color.Gray}>Week</Subheader>
-          </View>
-
-          <View style={styles.topbarItemView}>
-            <Subheader color={Color.Ink} bold>
-              Month
-            </Subheader>
-          </View>
-
-          <View style={styles.topbarItemView}>
-            <Subheader color={Color.Gray}>Year</Subheader>
-          </View>
-
-          <View style={styles.topbarItemView}>
-            <Subheader color={Color.Gray}>All the time</Subheader>
-          </View>
-        </View>
-
         <ScrollView style={styles.contentView}>
+          <View style={styles.topbarView}>
+            <View style={styles.topbarItemView}>
+              <Subheader color={Color.Gray}>Week</Subheader>
+            </View>
+
+            <View style={styles.topbarItemView}>
+              <Subheader color={Color.Ink} bold>
+                Month
+              </Subheader>
+            </View>
+
+            <View style={styles.topbarItemView}>
+              <Subheader color={Color.Gray}>Year</Subheader>
+            </View>
+
+            <View style={styles.topbarItemView}>
+              <Subheader color={Color.Gray}>All the time</Subheader>
+            </View>
+          </View>
+
           {EmojiList.map(({ name }) => (
             <View key={name} style={styles.rowView}>
               <Emoji mood={name} />
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16
   },
   topbarItemView: {
-    paddingHorizontal: 16
+    paddingHorizontal: 14
   },
   contentView: {
     paddingHorizontal: 24
