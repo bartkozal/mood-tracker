@@ -65,10 +65,10 @@ const styles = StyleSheet.create({
     paddingVertical: 16
   },
   topbarItemView: {
-    paddingHorizontal: 12
+    paddingHorizontal: 16
   },
   contentView: {
-    paddingHorizontal: 12
+    paddingHorizontal: 24
   },
   rowView: {
     flexDirection: "row",
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
   },
   barContainerView: {
     flex: 1,
-    paddingHorizontal: 12
+    paddingVertical: 8,
+    paddingLeft: 24
   },
   barBackView: {
     height: 40,

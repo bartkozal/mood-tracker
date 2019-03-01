@@ -30,7 +30,11 @@ export default class EmojiPopover extends React.Component<Props> {
         {_.chunk(EmojiList, 5).map((row, i) => (
           <View key={i} style={styles.emojiRowView}>
             {row.map(({ name }) => (
-              <TouchableOpacity key={name} onPress={() => onPress(name)}>
+              <TouchableOpacity
+                key={name}
+                onPress={() => onPress(name)}
+                style={{ padding: 8 }}
+              >
                 <Emoji mood={name} />
               </TouchableOpacity>
             ))}
@@ -46,6 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   popover: {
+    borderRadius: 12,
     padding: 8,
     backgroundColor: Color.White
   },

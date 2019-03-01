@@ -13,7 +13,6 @@ export default class Emoji extends React.Component<Props> {
     return (
       <Image
         style={{
-          margin: 8,
           ...(size
             ? {
                 width: size,
