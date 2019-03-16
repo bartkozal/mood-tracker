@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { DateTime } from "luxon";
 import Body from "../Text/Body";
 import EmojiPopover from "../EmojiPopover";
@@ -11,14 +11,18 @@ interface Props {
   month: number;
   day: number;
   onDayMoodChange: (day: string, mood: string) => void;
+  savedMood: {
+    [date: string]: {
+      mood: string;
+    };
+  };
 }
 
 const isWeekendDay = (weekday: number) => [6, 7].includes(weekday);
 
 export default class Day extends React.Component<Props> {
   state = {
-    isPopoverVisible: false,
-    mood: ""
+    isPopoverVisible: false
   };
 
   dayDateTime: DateTime;
@@ -50,14 +54,15 @@ export default class Day extends React.Component<Props> {
 
   setMood = (mood: string) => {
     this.props.onDayMoodChange(this.dayDateTime.toISODate(), mood);
-    this.setState({ mood, isPopoverVisible: false });
+    this.setState({ isPopoverVisible: false });
   };
 
   render() {
-    const { day } = this.props;
-    const { mood, isPopoverVisible } = this.state;
+    const { savedMood, day } = this.props;
+    const { isPopoverVisible } = this.state;
     const isWeekend = isWeekendDay(this.dayDateTime.weekday);
     const isToday = this.nowDateTime.equals(this.dayDateTime);
+    const savedDay = savedMood[this.dayDateTime.toISODate()];
 
     return (
       <>
@@ -72,8 +77,8 @@ export default class Day extends React.Component<Props> {
               ...(isToday ? styles.todayView : null)
             }}
           >
-            {mood ? (
-              <Emoji mood={mood} size={isToday ? 42 : null} />
+            {savedDay ? (
+              <Emoji mood={savedDay.mood} size={isToday ? 42 : null} />
             ) : (
               <Body color={isWeekend ? Color.Red : Color.Ink}>{day}</Body>
             )}

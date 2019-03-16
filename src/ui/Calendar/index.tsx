@@ -6,12 +6,17 @@ import Month from "./Month";
 
 interface Props {
   year: number;
+  savedMood: {
+    [date: string]: {
+      mood: string;
+    };
+  };
   onDayMoodChange: (day: string, mood: string) => void;
 }
 
 export default class Calendar extends React.Component<Props> {
   render() {
-    const { year, onDayMoodChange } = this.props;
+    const { year, onDayMoodChange, savedMood } = this.props;
     const monthNames = Info.months("short");
 
     return (
@@ -43,6 +48,7 @@ export default class Calendar extends React.Component<Props> {
               numberOfDays={numberOfDays}
               firstWeekday={firstWeekday}
               onDayMoodChange={onDayMoodChange}
+              savedMood={savedMood}
             />
           );
         })}

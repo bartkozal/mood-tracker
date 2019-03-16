@@ -14,6 +14,11 @@ interface Props {
   numberOfDays: number;
   firstWeekday: number;
   onDayMoodChange: (day: string, mood: string) => void;
+  savedMood: {
+    [date: string]: {
+      mood: string;
+    };
+  };
 }
 
 const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
@@ -27,7 +32,8 @@ export default class Month extends React.Component<Props> {
       name,
       numberOfDays,
       firstWeekday,
-      onDayMoodChange
+      onDayMoodChange,
+      savedMood
     } = this.props;
 
     return (
@@ -61,6 +67,7 @@ export default class Month extends React.Component<Props> {
                 month={month}
                 day={day}
                 onDayMoodChange={onDayMoodChange}
+                savedMood={savedMood}
               />
             </View>
           ))}

@@ -1,3 +1,5 @@
+import { State as StoreState } from "../state";
+
 export interface State {
   [date: string]: {
     mood: string;
@@ -5,6 +7,8 @@ export interface State {
 }
 
 const initialState: State = {};
+
+export const getCalendar = (state: StoreState) => state.calendar;
 
 enum ActionType {
   SetDayMood = "Calendar/SetDayMood"
