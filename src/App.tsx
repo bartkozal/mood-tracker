@@ -1,6 +1,8 @@
 import React from "react";
 import { createAppContainer } from "react-navigation";
 import { Font } from "expo";
+import { Provider } from "react-redux";
+import store from "./store";
 import TabNavigator from "./app/TabNavigator";
 
 const AppContainer = createAppContainer(TabNavigator);
@@ -20,6 +22,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    return this.state.isFontLoaded ? <AppContainer /> : null;
+    return this.state.isFontLoaded ? (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    ) : null;
   }
 }
