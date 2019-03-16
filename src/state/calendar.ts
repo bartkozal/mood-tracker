@@ -1,4 +1,8 @@
-interface State {} // TODO
+export interface State {
+  [date: string]: {
+    mood: string;
+  };
+}
 
 const initialState: State = {};
 
