@@ -2,7 +2,22 @@ import React from "react";
 import { Image } from "react-native";
 
 interface Props {
-  mood: string;
+  mood:
+    | "grin"
+    | "smile"
+    | "neutral"
+    | "sad"
+    | "cry"
+    | "sleeping"
+    | "love"
+    | "zany"
+    | "party"
+    | "cool"
+    | "scream"
+    | "sick"
+    | "what"
+    | "angry"
+    | "rage";
   size?: number | null;
 }
 

@@ -1,15 +1,7 @@
 import React from "react";
-import { createAppContainer, createBottomTabNavigator } from "react-navigation";
+import { createAppContainer } from "react-navigation";
 import { Font } from "expo";
-import MainScreen from "./screens/MainScreen";
-import AnalyticsScreen from "./screens/AnalyticsScreen";
-import SettingsScreen from "./screens/SettingsScreen";
-
-const TabNavigator = createBottomTabNavigator({
-  Main: MainScreen,
-  Analytics: AnalyticsScreen,
-  Settings: SettingsScreen
-});
+import TabNavigator from "./app/TabNavigator";
 
 const AppContainer = createAppContainer(TabNavigator);
 
