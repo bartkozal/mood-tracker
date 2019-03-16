@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
-import analytics from "./state/analytics";
+import calendar from "./calendar";
 import logger from "redux-logger";
 
 export default createStore(
-  combineReducers({ analytics }),
+  combineReducers({ calendar }),
   applyMiddleware(logger)
 );

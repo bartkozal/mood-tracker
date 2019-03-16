@@ -13,6 +13,7 @@ interface Props {
   name: string;
   numberOfDays: number;
   firstWeekday: number;
+  onDayMoodChange: (day: string, mood: string) => void;
 }
 
 const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
@@ -20,7 +21,14 @@ const WEEKDAY_VIEW_WIDTH = 100 / WEEKDAYS.length;
 
 export default class Month extends React.Component<Props> {
   render() {
-    const { year, month, name, numberOfDays, firstWeekday } = this.props;
+    const {
+      year,
+      month,
+      name,
+      numberOfDays,
+      firstWeekday,
+      onDayMoodChange
+    } = this.props;
 
     return (
       <View style={styles.monthView}>
@@ -48,7 +56,12 @@ export default class Month extends React.Component<Props> {
                   : null)
               }}
             >
-              <Day year={year} month={month} day={day} />
+              <Day
+                year={year}
+                month={month}
+                day={day}
+                onDayMoodChange={onDayMoodChange}
+              />
             </View>
           ))}
         </View>

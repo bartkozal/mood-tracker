@@ -2,7 +2,7 @@ import React from "react";
 import { createAppContainer } from "react-navigation";
 import { Font } from "expo";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./state";
 import TabNavigator from "./app/TabNavigator";
 
 const AppContainer = createAppContainer(TabNavigator);

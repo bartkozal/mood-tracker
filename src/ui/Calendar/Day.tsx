@@ -10,6 +10,7 @@ interface Props {
   year: number;
   month: number;
   day: number;
+  onDayMoodChange: (day: string, mood: string) => void;
 }
 
 const isWeekendDay = (weekday: number) => [6, 7].includes(weekday);
@@ -20,31 +21,43 @@ export default class Day extends React.Component<Props> {
     mood: ""
   };
 
+  dayDateTime: DateTime;
+  nowDateTime: DateTime;
   dayView = React.createRef<TouchableOpacity>();
-  now = DateTime.local();
+
+  constructor(props: Props) {
+    super(props);
+
+    const { year, month, day } = this.props;
+    const now = DateTime.local();
+
+    this.dayDateTime = DateTime.fromObject({
+      year,
+      month,
+      day
+    });
+
+    this.nowDateTime = DateTime.fromObject({
+      year: now.year,
+      month: now.month,
+      day: now.day
+    });
+  }
 
   setIsPopoverVisible = (isPopoverVisible: boolean) => {
     this.setState({ isPopoverVisible });
   };
 
   setMood = (mood: string) => {
+    this.props.onDayMoodChange(this.dayDateTime.toISODate(), mood);
     this.setState({ mood, isPopoverVisible: false });
   };
 
   render() {
-    const { year, month, day } = this.props;
+    const { day } = this.props;
     const { mood, isPopoverVisible } = this.state;
-    const dayDateTime = DateTime.fromObject({
-      year,
-      month,
-      day
-    });
-    const isWeekend = isWeekendDay(dayDateTime.weekday);
-    const isToday = DateTime.fromObject({
-      year: this.now.year,
-      month: this.now.month,
-      day: this.now.day
-    }).equals(dayDateTime);
+    const isWeekend = isWeekendDay(this.dayDateTime.weekday);
+    const isToday = this.nowDateTime.equals(this.dayDateTime);
 
     return (
       <>
