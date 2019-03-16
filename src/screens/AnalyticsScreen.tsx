@@ -30,7 +30,7 @@ const TOPBAR_OPTIONS = ["Week", "Month", "Year", "All the time"];
 }))
 export default class AnalyticsScreen extends React.Component<Props> {
   state = {
-    activeOption: "All the time"
+    activeOption: "Month"
   };
 
   setActiveOption = (option: string) => {
