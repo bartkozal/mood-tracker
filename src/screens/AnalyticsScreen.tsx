@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 import { connect } from "react-redux";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { State } from "../state";
@@ -10,18 +9,23 @@ import Color from "../ui/Color";
 import Bar from "../ui/Bar";
 
 interface Props {
-  allTimeMood: {
+  allTime: {
     [mood: string]: number;
   };
+  allTimeTotalCount: number;
 }
 
-@connect((state: State) => ({
-  allTimeMood: getAllTimeMood(state)
-}))
+@connect((state: State) => {
+  const [allTime, allTimeTotalCount] = getAllTimeMood(state);
+
+  return {
+    allTime,
+    allTimeTotalCount
+  };
+})
 export default class AnalyticsScreen extends React.Component<Props> {
   render() {
-    const { allTimeMood } = this.props;
-    const totalCount = _.sum(Object.values(allTimeMood));
+    const { allTime, allTimeTotalCount } = this.props;
 
     return (
       <Screen>
@@ -49,8 +53,13 @@ export default class AnalyticsScreen extends React.Component<Props> {
             </View>
           </View>
 
-          {Object.entries(allTimeMood).map(([mood, count]) => (
-            <Bar key={mood} mood={mood} count={count} totalCount={totalCount} />
+          {Object.entries(allTime).map(([mood, count]) => (
+            <Bar
+              key={mood}
+              mood={mood}
+              count={count}
+              totalCount={allTimeTotalCount}
+            />
           ))}
         </ScrollView>
       </Screen>

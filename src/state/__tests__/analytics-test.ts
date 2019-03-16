@@ -9,8 +9,11 @@ test("getAllTimeMood", () => {
     }
   };
 
-  expect(getAllTimeMood(state)).toEqual({
-    grin: 1,
-    smile: 2
-  });
+  expect(getAllTimeMood(state)).toEqual([
+    {
+      grin: 1,
+      smile: 2
+    },
+    3
+  ]);
 });
