@@ -2,25 +2,30 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, ScrollView } from "react-native";
 import { State } from "../state";
-import { getAllTimeMood } from "../state/analytics";
+import {
+  getWeekMood,
+  getMonthMood,
+  getYearMood,
+  getAllTimeMood,
+  MoodAnalytics
+} from "../state/analytics";
 import Screen from "../ui/Screen";
 import Bar from "../ui/Bar";
 import Topbar from "../ui/Topbar";
 
-type OptionMood = [
-  {
-    [mood: string]: number;
-  },
-  number
-];
-
 interface Props {
-  allTimeMood: OptionMood;
+  weekMood: MoodAnalytics;
+  monthMood: MoodAnalytics;
+  yearMood: MoodAnalytics;
+  allTimeMood: MoodAnalytics;
 }
 
 const TOPBAR_OPTIONS = ["Week", "Month", "Year", "All the time"];
 
 @connect((state: State) => ({
+  weekMood: getWeekMood(state),
+  monthMood: getMonthMood(state),
+  yearMood: getYearMood(state),
   allTimeMood: getAllTimeMood(state)
 }))
 export default class AnalyticsScreen extends React.Component<Props> {
@@ -34,17 +39,17 @@ export default class AnalyticsScreen extends React.Component<Props> {
     });
   };
 
-  getActiveOptionMood = (): OptionMood => {
-    const { allTimeMood } = this.props;
+  getActiveOptionMood = (): MoodAnalytics => {
+    const { weekMood, monthMood, yearMood, allTimeMood } = this.props;
     const { activeOption } = this.state;
 
     switch (activeOption) {
       case "Week":
-        return [{}, 0];
+        return weekMood;
       case "Month":
-        return [{}, 0];
+        return monthMood;
       case "Year":
-        return [{}, 0];
+        return yearMood;
       case "All the time":
         return allTimeMood;
       default:

@@ -26,25 +26,17 @@ export default class Day extends React.Component<Props> {
   };
 
   dayDateTime: DateTime;
-  nowDateTime: DateTime;
   dayView = React.createRef<TouchableOpacity>();
 
   constructor(props: Props) {
     super(props);
 
     const { year, month, day } = this.props;
-    const now = DateTime.local();
 
     this.dayDateTime = DateTime.fromObject({
       year,
       month,
       day
-    });
-
-    this.nowDateTime = DateTime.fromObject({
-      year: now.year,
-      month: now.month,
-      day: now.day
     });
   }
 
@@ -61,7 +53,8 @@ export default class Day extends React.Component<Props> {
     const { savedMood, day } = this.props;
     const { isPopoverVisible } = this.state;
     const isWeekend = isWeekendDay(this.dayDateTime.weekday);
-    const isToday = this.nowDateTime.equals(this.dayDateTime);
+    const isToday =
+      DateTime.local().toISODate() === this.dayDateTime.toISODate();
     const savedDay = savedMood[this.dayDateTime.toISODate()];
 
     return (
