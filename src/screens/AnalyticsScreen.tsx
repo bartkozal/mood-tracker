@@ -2,23 +2,18 @@ import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { LinearGradient } from "expo";
 import { State } from "../state";
 import { getAllTimeMood } from "../state/analytics";
 import Screen from "../ui/Screen";
-import Emoji from "../ui/Emoji";
 import Subheader from "../ui/Text/Subheader";
-import Body from "../ui/Text/Body";
-import Color, { Gradient } from "../ui/Color";
+import Color from "../ui/Color";
+import Bar from "../ui/Bar";
 
 interface Props {
   allTimeMood: {
     [mood: string]: number;
   };
 }
-
-const toPercent = (count: number, totalCount: number) =>
-  `${Math.round((count / totalCount) * 100)}%`;
 
 @connect((state: State) => ({
   allTimeMood: getAllTimeMood(state)
@@ -54,30 +49,9 @@ export default class AnalyticsScreen extends React.Component<Props> {
             </View>
           </View>
 
-          {Object.entries(allTimeMood).map(([mood, count]) => {
-            const percent = toPercent(count, totalCount);
-
-            return (
-              <View key={mood} style={styles.rowView}>
-                <Emoji mood={mood} />
-                <View style={styles.barContainerView}>
-                  <View style={styles.barBackView}>
-                    <LinearGradient
-                      colors={Gradient.Selection}
-                      style={{ ...styles.barView, width: percent }}
-                    >
-                      <View style={{ flexDirection: "row" }}>
-                        <Body color={Color.White} bold>
-                          {count}
-                        </Body>
-                        <Body color={Color.White}> ({percent})</Body>
-                      </View>
-                    </LinearGradient>
-                  </View>
-                </View>
-              </View>
-            );
-          })}
+          {Object.entries(allTimeMood).map(([mood, count]) => (
+            <Bar key={mood} mood={mood} count={count} totalCount={totalCount} />
+          ))}
         </ScrollView>
       </Screen>
     );
@@ -95,26 +69,5 @@ const styles = StyleSheet.create({
   },
   contentView: {
     paddingHorizontal: 24
-  },
-  rowView: {
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  barContainerView: {
-    flex: 1,
-    paddingVertical: 8,
-    paddingLeft: 24
-  },
-  barBackView: {
-    height: 40,
-    backgroundColor: Color.Lavender,
-    borderRadius: 4
-  },
-  barView: {
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    paddingRight: 8,
-    borderRadius: 4
   }
 });
