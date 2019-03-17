@@ -1,10 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { DateTime } from "luxon";
-import { setDayMood, getCalendar } from "../state/calendar";
+import {
+  setDayMood,
+  getCalendar,
+  setCalendar,
+  State as CalendarState
+} from "../state/calendar";
 import { State } from "../state";
 import Screen from "../ui/Screen";
 import Calendar from "../ui/Calendar";
+import { loadState } from "../app/storage";
 
 interface Props {
   savedMood: {
@@ -12,6 +18,7 @@ interface Props {
       mood: string;
     };
   };
+  setCalendar: (calendar: CalendarState) => void;
   setDayMood: (day: string, mood: string) => void;
 }
 
@@ -19,7 +26,7 @@ interface Props {
   (state: State) => ({
     savedMood: getCalendar(state)
   }),
-  { setDayMood }
+  { setDayMood, setCalendar }
 )
 export default class MainScreen extends React.Component<Props> {
   now = DateTime.local();
@@ -28,6 +35,11 @@ export default class MainScreen extends React.Component<Props> {
     activeYear: this.now.year,
     activeMonth: this.now.month
   };
+
+  async componentDidMount() {
+    const calendar = await loadState("Calendar");
+    this.props.setCalendar(calendar);
+  }
 
   handlePreviousYearChange = () => {
     this.setState({ activeYear: this.state.activeYear - 1, activeMonth: 1 });

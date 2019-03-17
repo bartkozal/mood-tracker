@@ -1,12 +1,21 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
-import calendarReducer, { State as CalendarState } from "./calendar";
-import logger from "redux-logger";
+import calendarReducer, {
+  middleware as calendarMiddleware,
+  State as CalendarState
+} from "./calendar";
 
 export interface State {
   calendar: CalendarState;
 }
 
+let middlewares = [calendarMiddleware];
+
+if (__DEV__) {
+  const { logger } = require("redux-logger");
+  // middlewares.push(logger);
+}
+
 export default createStore(
   combineReducers({ calendar: calendarReducer }),
-  applyMiddleware(logger) // TODO set only for development
+  applyMiddleware(...middlewares)
 );
