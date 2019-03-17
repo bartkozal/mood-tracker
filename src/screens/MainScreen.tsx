@@ -22,17 +22,34 @@ interface Props {
   { setDayMood }
 )
 export default class MainScreen extends React.Component<Props> {
+  now = DateTime.local();
+
+  state = {
+    activeYear: this.now.year,
+    activeMonth: this.now.month
+  };
+
+  handlePreviousYearChange = () => {
+    this.setState({ activeYear: this.state.activeYear - 1, activeMonth: 1 });
+  };
+
+  handleNextYearChange = () => {
+    this.setState({ activeYear: this.state.activeYear + 1, activeMonth: 1 });
+  };
+
   render() {
     const { setDayMood, savedMood } = this.props;
-    const now = DateTime.local();
+    const { activeYear, activeMonth } = this.state;
 
     return (
       <Screen>
         <Calendar
-          activeYear={now.year}
-          activeMonth={now.month}
+          activeYear={activeYear}
+          activeMonth={activeMonth}
           savedMood={savedMood}
           onDayMoodChange={(day, mood) => setDayMood(day, mood)}
+          onPreviousYearChange={this.handlePreviousYearChange}
+          onNextYearChange={this.handleNextYearChange}
         />
       </Screen>
     );

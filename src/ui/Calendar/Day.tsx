@@ -25,37 +25,28 @@ export default class Day extends React.Component<Props> {
     isPopoverVisible: false
   };
 
-  dayDateTime: DateTime;
   dayView = React.createRef<TouchableOpacity>();
-
-  constructor(props: Props) {
-    super(props);
-
-    const { year, month, day } = this.props;
-
-    this.dayDateTime = DateTime.fromObject({
-      year,
-      month,
-      day
-    });
-  }
 
   setIsPopoverVisible = (isPopoverVisible: boolean) => {
     this.setState({ isPopoverVisible });
   };
 
-  setMood = (mood: string) => {
-    this.props.onDayMoodChange(this.dayDateTime.toISODate(), mood);
+  setMood = (dayDateTime: DateTime, mood: string) => {
+    this.props.onDayMoodChange(dayDateTime.toISODate(), mood);
     this.setState({ isPopoverVisible: false });
   };
 
   render() {
-    const { savedMood, day } = this.props;
+    const { savedMood, day, month, year } = this.props;
     const { isPopoverVisible } = this.state;
-    const isWeekend = isWeekendDay(this.dayDateTime.weekday);
-    const isToday =
-      DateTime.local().toISODate() === this.dayDateTime.toISODate();
-    const savedDay = savedMood[this.dayDateTime.toISODate()];
+    const dayDateTime = DateTime.fromObject({
+      year,
+      month,
+      day
+    });
+    const isWeekend = isWeekendDay(dayDateTime.weekday);
+    const isToday = DateTime.local().toISODate() === dayDateTime.toISODate();
+    const savedDay = savedMood[dayDateTime.toISODate()];
     const dayView = this.dayView.current;
 
     return (
@@ -84,7 +75,7 @@ export default class Day extends React.Component<Props> {
             isVisible={isPopoverVisible}
             fromView={dayView}
             onClose={() => this.setIsPopoverVisible(false)}
-            onPress={newMood => this.setMood(newMood)}
+            onPress={newMood => this.setMood(dayDateTime, newMood)}
           />
         ) : null}
       </>

@@ -1,8 +1,8 @@
 import React from "react";
-import { FlatList, View } from "react-native";
+import { FlatList } from "react-native";
 import { DateTime, Info } from "luxon";
-import Title from "../Text/Title";
 import Month from "./Month";
+import Header from "./Header";
 
 interface Props {
   activeYear: number;
@@ -13,6 +13,8 @@ interface Props {
     };
   };
   onDayMoodChange: (day: string, mood: string) => void;
+  onPreviousYearChange: () => void;
+  onNextYearChange: () => void;
 }
 
 interface MonthItem {
@@ -71,7 +73,13 @@ export default class Calendar extends React.Component<Props> {
   }
 
   render() {
-    const { activeYear, onDayMoodChange, savedMood } = this.props;
+    const {
+      activeYear,
+      onDayMoodChange,
+      savedMood,
+      onPreviousYearChange,
+      onNextYearChange
+    } = this.props;
     const monthNames = Info.months("short");
     const months: MonthItem[] = monthNames.map(monthName => {
       const month = monthNames.indexOf(monthName) + 1;
@@ -106,14 +114,11 @@ export default class Calendar extends React.Component<Props> {
           };
         }}
         ListHeaderComponent={
-          <View
-            style={{
-              padding: 16,
-              alignItems: "center"
-            }}
-          >
-            <Title>{activeYear}</Title>
-          </View>
+          <Header
+            year={activeYear}
+            onLeftChevronPress={onPreviousYearChange}
+            onRightChevronPress={onNextYearChange}
+          />
         }
         renderItem={({ item }) => (
           <Month

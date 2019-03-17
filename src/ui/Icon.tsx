@@ -3,7 +3,7 @@ import { Image } from "react-native";
 
 interface Props {
   name: string;
-  color: "gray" | "sky";
+  color: "gray" | "sky" | "ink";
   size?: number;
 }
 
@@ -51,5 +51,13 @@ export const IconList = [
   {
     name: "sliders-sky",
     source: require("../../assets/icons/sliders-sky.png")
+  },
+  {
+    name: "chevron-left-ink",
+    source: require("../../assets/icons/chevron-left-ink.png")
+  },
+  {
+    name: "chevron-right-ink",
+    source: require("../../assets/icons/chevron-right-ink.png")
   }
 ];
