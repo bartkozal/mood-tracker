@@ -15,6 +15,22 @@ interface Props {
   onDayMoodChange: (day: string, mood: string) => void;
 }
 
+const HEADER_HEIGHT = 70.33333587646484;
+const FIVE_ROWS_MONTH_HEIGHT = 348.666748046875;
+const SIX_ROWS_MONTH_HEIGHT = 397.666748046875;
+
+const calculateMonthHeight = (firstWeekday: number, numberOfDays: number) => {
+  const numberOfAvailableSlotsInFiveRowsMonth = 35;
+  const numberOfTakenSlots = firstWeekday - 1 + numberOfDays;
+  const isFiveRowsMonth =
+    numberOfTakenSlots <= numberOfAvailableSlotsInFiveRowsMonth;
+
+  return isFiveRowsMonth ? FIVE_ROWS_MONTH_HEIGHT : SIX_ROWS_MONTH_HEIGHT;
+};
+
+const getViewOffset = (month: number) => (month === 1 ? 0 : -HEADER_HEIGHT);
+const getViewPosition = (month: number) => 0;
+
 export default class Calendar extends React.Component<Props> {
   flatList = React.createRef<FlatList<any>>();
 
@@ -26,8 +42,8 @@ export default class Calendar extends React.Component<Props> {
       flatList.scrollToIndex({
         animated: false,
         index: activeMonth - 1,
-        viewOffset: 0,
-        viewPosition: 0
+        viewOffset: getViewOffset(activeMonth),
+        viewPosition: getViewPosition(activeMonth)
       });
     }
   }
@@ -57,11 +73,12 @@ export default class Calendar extends React.Component<Props> {
         keyExtractor={item => String(item.month)}
         showsVerticalScrollIndicator={false}
         getItemLayout={(months, index) => {
-          // TODO calculate
-          const monthViewHeight = 350;
+          const { firstWeekday, numberOfDays } = months![index];
+          const monthHeight = calculateMonthHeight(firstWeekday, numberOfDays);
+
           return {
-            length: monthViewHeight,
-            offset: monthViewHeight * index,
+            length: monthHeight,
+            offset: monthHeight * index, // TODO doesn't include 6 row months
             index
           };
         }}

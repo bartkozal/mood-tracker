@@ -20,7 +20,7 @@ interface Props {
   allTimeMood: MoodAnalytics;
 }
 
-const topbarOptions = ["Week", "Month", "Year", "All the time"];
+const TOPBAR_OPTIONS = ["Week", "Month", "Year", "All the time"];
 
 @connect((state: State) => ({
   weekMood: getWeekMood(state),
@@ -64,7 +64,7 @@ export default class AnalyticsScreen extends React.Component<Props> {
     return (
       <Screen>
         <Topbar
-          options={topbarOptions}
+          options={TOPBAR_OPTIONS}
           active={activeOption}
           onOptionPress={this.setActiveOption}
         />
