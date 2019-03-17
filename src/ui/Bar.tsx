@@ -13,12 +13,18 @@ interface Props {
 }
 
 const toPercent = (count: number, totalCount: number) =>
-  `${Math.round((count / totalCount) * 100)}%`;
+  Math.round((count / totalCount) * 100);
+
+const formatPercent = (percentValue: number) => `${percentValue}%`;
+
+const innerPercentThreshold = 30;
 
 export default class Bar extends React.Component<Props> {
   render() {
     const { mood, count, totalCount } = this.props;
-    const percent = toPercent(count, totalCount);
+    const percentValue = toPercent(count, totalCount);
+    const percent = formatPercent(percentValue);
+    const showInnerPercent = innerPercentThreshold < percentValue;
 
     return (
       <View key={mood} style={styles.rowView}>
@@ -29,13 +35,24 @@ export default class Bar extends React.Component<Props> {
               colors={Gradient.Selection}
               style={{ ...styles.barView, width: percent }}
             >
-              <View style={{ flexDirection: "row" }}>
-                <Body color={Color.White} bold>
+              {showInnerPercent ? (
+                <View style={styles.innerPercent}>
+                  <Body color={Color.White} bold>
+                    {count}
+                  </Body>
+                  <Body color={Color.White}> ({percent})</Body>
+                </View>
+              ) : null}
+            </LinearGradient>
+
+            {!showInnerPercent ? (
+              <View style={styles.outerPercent}>
+                <Body color={Color.Ink} bold>
                   {count}
                 </Body>
-                <Body color={Color.White}> ({percent})</Body>
+                <Body color={Color.Ink}> ({percent})</Body>
               </View>
-            </LinearGradient>
+            ) : null}
           </View>
         </View>
       </View>
@@ -54,6 +71,8 @@ const styles = StyleSheet.create({
     paddingLeft: 24
   },
   barBackView: {
+    flexDirection: "row",
+    alignItems: "center",
     height: 40,
     backgroundColor: Color.Lavender,
     borderRadius: 4
@@ -64,5 +83,12 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     paddingRight: 8,
     borderRadius: 4
+  },
+  innerPercent: {
+    flexDirection: "row"
+  },
+  outerPercent: {
+    flexDirection: "row",
+    paddingLeft: 8
   }
 });
