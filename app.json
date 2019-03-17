@@ -20,7 +20,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.brtjkzl.moodtracker",
       "supportsTablet": false
+    },
+    "android": {
+      "package": "com.brtjkzl.moodtracker"
     }
   }
 }
