@@ -56,6 +56,7 @@ export default class Day extends React.Component<Props> {
     const isToday =
       DateTime.local().toISODate() === this.dayDateTime.toISODate();
     const savedDay = savedMood[this.dayDateTime.toISODate()];
+    const dayView = this.dayView.current;
 
     return (
       <>
@@ -78,12 +79,14 @@ export default class Day extends React.Component<Props> {
           </View>
         </TouchableOpacity>
 
-        <EmojiPopover
-          isVisible={isPopoverVisible}
-          fromView={this.dayView.current!}
-          onClose={() => this.setIsPopoverVisible(false)}
-          onPress={newMood => this.setMood(newMood)}
-        />
+        {dayView ? (
+          <EmojiPopover
+            isVisible={isPopoverVisible}
+            fromView={dayView}
+            onClose={() => this.setIsPopoverVisible(false)}
+            onPress={newMood => this.setMood(newMood)}
+          />
+        ) : null}
       </>
     );
   }

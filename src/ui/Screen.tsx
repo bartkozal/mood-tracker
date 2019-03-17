@@ -8,7 +8,10 @@ export default class Screen extends React.Component {
   render() {
     return (
       <SafeAreaView>
-        <LinearGradient colors={Gradient.Background}>
+        <LinearGradient
+          colors={Gradient.Background}
+          style={{ paddingHorizontal: 12 }}
+        >
           {this.props.children}
         </LinearGradient>
       </SafeAreaView>

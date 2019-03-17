@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, FlatList } from "react-native";
 import { State } from "../state";
 import {
   getWeekMood,
@@ -63,17 +63,21 @@ export default class AnalyticsScreen extends React.Component<Props> {
 
     return (
       <Screen>
-        <ScrollView contentContainerStyle={styles.contentView}>
-          <Topbar
-            options={topbarOptions}
-            active={activeOption}
-            onOptionPress={this.setActiveOption}
-          />
+        <Topbar
+          options={topbarOptions}
+          active={activeOption}
+          onOptionPress={this.setActiveOption}
+        />
 
-          {Object.entries(activeOptionMood).map(([mood, count]) => (
-            <Bar key={mood} mood={mood} count={count} totalCount={totalCount} />
-          ))}
-        </ScrollView>
+        <FlatList
+          data={Object.entries(activeOptionMood)}
+          keyExtractor={([mood, _]) => mood}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.contentView}
+          renderItem={({ item: [mood, count] }) => (
+            <Bar mood={mood} count={count} totalCount={totalCount} />
+          )}
+        />
       </Screen>
     );
   }
@@ -81,7 +85,7 @@ export default class AnalyticsScreen extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   contentView: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 12,
     height: "100%"
   }
 });

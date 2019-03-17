@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ScrollView } from "react-native";
 import { DateTime } from "luxon";
 import { setDayMood, getCalendar } from "../state/calendar";
 import { State } from "../state";
@@ -25,17 +24,16 @@ interface Props {
 export default class MainScreen extends React.Component<Props> {
   render() {
     const { setDayMood, savedMood } = this.props;
-    const currentYear = DateTime.local().year;
+    const now = DateTime.local();
 
     return (
       <Screen>
-        <ScrollView style={{ paddingHorizontal: 12 }}>
-          <Calendar
-            year={currentYear}
-            savedMood={savedMood}
-            onDayMoodChange={(day, mood) => setDayMood(day, mood)}
-          />
-        </ScrollView>
+        <Calendar
+          activeYear={now.year}
+          activeMonth={now.month}
+          savedMood={savedMood}
+          onDayMoodChange={(day, mood) => setDayMood(day, mood)}
+        />
       </Screen>
     );
   }
