@@ -12,7 +12,7 @@ let middlewares = [calendarMiddleware];
 
 if (__DEV__) {
   const { logger } = require("redux-logger");
-  // middlewares.push(logger);
+  middlewares.push(logger);
 }
 
 export default createStore(
