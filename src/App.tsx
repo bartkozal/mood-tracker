@@ -1,5 +1,6 @@
 import React from "react";
 import { createAppContainer } from "react-navigation";
+import { StatusBar } from "react-native";
 import { Font } from "expo";
 import { Provider } from "react-redux";
 import store from "./state";
@@ -24,6 +25,7 @@ export default class App extends React.Component {
   render() {
     return this.state.isFontLoaded ? (
       <Provider store={store}>
+        <StatusBar barStyle="dark-content" />
         <AppContainer />
       </Provider>
     ) : null;
