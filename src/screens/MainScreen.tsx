@@ -1,4 +1,5 @@
 import React from "react";
+import { NavigationScreenProps } from "react-navigation";
 import { connect } from "react-redux";
 import { DateTime } from "luxon";
 import {
@@ -12,7 +13,7 @@ import Screen from "../ui/Screen";
 import Calendar from "../ui/Calendar";
 import { loadState } from "../app/storage";
 
-interface Props {
+interface Props extends NavigationScreenProps {
   savedMood: {
     [date: string]: {
       mood: string;
@@ -37,8 +38,9 @@ export default class MainScreen extends React.Component<Props> {
   };
 
   async componentDidMount() {
+    const { setCalendar } = this.props;
     const calendar = await loadState("Calendar");
-    this.props.setCalendar(calendar);
+    setCalendar(calendar);
   }
 
   handlePreviousYearChange = () => {
@@ -50,7 +52,7 @@ export default class MainScreen extends React.Component<Props> {
   };
 
   render() {
-    const { setDayMood, savedMood } = this.props;
+    const { setDayMood, savedMood, navigation } = this.props;
     const { activeYear, activeMonth } = this.state;
 
     return (
@@ -62,6 +64,7 @@ export default class MainScreen extends React.Component<Props> {
           onDayMoodChange={(day, mood) => setDayMood(day, mood)}
           onPreviousYearChange={this.handlePreviousYearChange}
           onNextYearChange={this.handleNextYearChange}
+          addNavigationListener={navigation.addListener}
         />
       </Screen>
     );

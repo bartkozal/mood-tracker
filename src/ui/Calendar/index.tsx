@@ -1,5 +1,9 @@
 import React from "react";
 import { FlatList } from "react-native";
+import {
+  NavigationEventCallback,
+  NavigationEventSubscription
+} from "react-navigation";
 import { DateTime, Info } from "luxon";
 import Month from "./Month";
 import Header from "./Header";
@@ -15,6 +19,10 @@ interface Props {
   onDayMoodChange: (day: string, mood: string) => void;
   onPreviousYearChange: () => void;
   onNextYearChange: () => void;
+  addNavigationListener: (
+    eventName: "didFocus" | "willBlur" | "willFocus" | "didBlur",
+    callback: NavigationEventCallback
+  ) => NavigationEventSubscription;
 }
 
 interface MonthItem {
@@ -47,18 +55,11 @@ const calculateMonthOffset = ({ month }: MonthItem, months: MonthItem[]) => {
   }, 0);
 };
 
-const getViewOffset = (month: number) => {
-  if (month === 1) return 0;
-  if (month === 12) return HEADER_HEIGHT;
-  return -HEADER_HEIGHT;
-};
-
-const getViewPosition = (month: number) => (month === 12 ? 1 : -0.5);
-
 export default class Calendar extends React.Component<Props> {
   flatList = React.createRef<FlatList<MonthItem>>();
+  didScreenFocus: NavigationEventSubscription | null = null;
 
-  componentDidMount() {
+  centerCurrentMonth = () => {
     const { activeMonth } = this.props;
     const flatList = this.flatList.current;
 
@@ -66,9 +67,23 @@ export default class Calendar extends React.Component<Props> {
       flatList.scrollToIndex({
         animated: false,
         index: activeMonth - 1,
-        viewOffset: getViewOffset(activeMonth),
-        viewPosition: getViewPosition(activeMonth)
+        viewOffset: -HEADER_HEIGHT,
+        viewPosition: 0 // TODO
       });
+    }
+  };
+
+  componentDidMount() {
+    const { addNavigationListener } = this.props;
+    this.centerCurrentMonth();
+    this.didScreenFocus = addNavigationListener("didFocus", () =>
+      this.centerCurrentMonth()
+    );
+  }
+
+  componentWillUnmount() {
+    if (this.didScreenFocus) {
+      this.didScreenFocus.remove();
     }
   }
 
