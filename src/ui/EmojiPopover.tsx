@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.White
   },
   arrow: {
-    width: 51,
-    height: 25
+    width: 29,
+    height: 14
   }
 });
