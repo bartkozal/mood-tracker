@@ -67,8 +67,8 @@ export default class Calendar extends React.Component<Props> {
       flatList.scrollToIndex({
         animated: false,
         index: activeMonth - 1,
-        viewOffset: -HEADER_HEIGHT,
-        viewPosition: 0 // TODO
+        viewOffset: activeMonth === 1 ? 0 : -HEADER_HEIGHT,
+        viewPosition: 0
       });
     }
   };

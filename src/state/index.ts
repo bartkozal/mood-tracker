@@ -10,10 +10,10 @@ export interface State {
 
 let middlewares = [calendarMiddleware];
 
-// if (__DEV__) {
-//   const { logger } = require("redux-logger");
-//   middlewares.push(logger);
-// }
+if (__DEV__) {
+  const { logger } = require("redux-logger");
+  middlewares.push(logger);
+}
 
 export default createStore(
   combineReducers({ calendar: calendarReducer }),
