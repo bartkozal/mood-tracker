@@ -7,7 +7,7 @@
     "githubUrl": "https://github.com/brtjkzl/mood-tracker",
     "sdkVersion": "32.0.0",
     "platforms": ["ios", "android"],
-    "version": "0.1.1",
+    "version": "0.1.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -21,7 +21,10 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.brtjkzl.moodtracker",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.brtjkzl.moodtracker"
