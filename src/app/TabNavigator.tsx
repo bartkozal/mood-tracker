@@ -1,6 +1,6 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
-import { createBottomTabNavigator } from "react-navigation";
+import { Animated, StyleSheet } from "react-native";
+import { createBottomTabNavigator, BottomTabBar } from "react-navigation";
 import MainScreen from "../screens/MainScreen";
 import AnalyticsScreen from "../screens/AnalyticsScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -20,6 +20,38 @@ const getIconName = (routeName: string) =>
     [Route.Settings]: "sliders"
   }[routeName]);
 
+interface TabBarIndicatorProps {
+  activeIndex: number;
+}
+
+class TabBarIndicator extends React.Component<TabBarIndicatorProps> {
+  state = {
+    xTranslation: new Animated.Value(0)
+  };
+
+  componentDidUpdate() {
+    Animated.timing(this.state.xTranslation, {
+      toValue: this.props.activeIndex,
+      duration: 300
+    }).start();
+  }
+
+  render() {
+    return (
+      <Animated.View
+        style={{
+          ...styles.tabBarIndicator,
+          left: this.state.xTranslation.interpolate({
+            inputRange: [0, 2],
+            outputRange: ["0%", "66.6%"]
+          })
+        }}
+      />
+    );
+  }
+}
+const TabBarComponent = (props: any) => <BottomTabBar {...props} />;
+
 export default createBottomTabNavigator(
   {
     [Route.Main]: MainScreen,
@@ -28,24 +60,6 @@ export default createBottomTabNavigator(
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
-      tabBarButtonComponent: (props: any) => {
-        const isActive = props.children[0].props.activeOpacity === 1;
-
-        return (
-          <TouchableOpacity
-            {...props}
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "flex-end",
-              flexDirection: "column",
-              paddingTop: isActive ? 12 : 15,
-              borderTopColor: Color.Sky,
-              borderTopWidth: isActive ? 3 : 0
-            }}
-          />
-        );
-      },
       tabBarIcon: ({ focused }) => {
         const name = getIconName(navigation.state.routeName);
         const color = focused ? "sky" : "gray";
@@ -53,6 +67,14 @@ export default createBottomTabNavigator(
         return <Icon name={name} color={color} />;
       }
     }),
+    tabBarComponent: props => {
+      return (
+        <>
+          <TabBarIndicator activeIndex={props.navigation.state.index} />
+          <TabBarComponent {...props} style={styles.tabBar} />
+        </>
+      );
+    },
     tabBarOptions: {
       showLabel: false,
       style: {
@@ -64,3 +86,15 @@ export default createBottomTabNavigator(
     }
   }
 );
+
+const styles = StyleSheet.create({
+  tabBarIndicator: {
+    height: 4,
+    width: "33.33%",
+    backgroundColor: Color.Sky
+  },
+  tabBar: {
+    paddingTop: 11,
+    borderTopWidth: 0
+  }
+});

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, FlatList, Alert } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
 import { State } from "../state";
 import {
