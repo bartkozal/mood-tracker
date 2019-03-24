@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, ScrollView, FlatList } from "react-native";
+import { StyleSheet, FlatList, Alert } from "react-native";
+import GestureRecognizer from "react-native-swipe-gestures";
 import { State } from "../state";
 import {
   getWeekMood,
@@ -39,6 +40,28 @@ export default class AnalyticsScreen extends React.Component<Props> {
     });
   };
 
+  activatePreviousOption = () => {
+    const activeOptionIndex = TOPBAR_OPTIONS.indexOf(this.state.activeOption);
+    const previousOptionIndex = activeOptionIndex - 1;
+
+    if (previousOptionIndex >= 0) {
+      this.setState({
+        activeOption: TOPBAR_OPTIONS[previousOptionIndex]
+      });
+    }
+  };
+
+  activateNextOption = () => {
+    const activeOptionIndex = TOPBAR_OPTIONS.indexOf(this.state.activeOption);
+    const nextOptionIndex = activeOptionIndex + 1;
+
+    if (nextOptionIndex < TOPBAR_OPTIONS.length) {
+      this.setState({
+        activeOption: TOPBAR_OPTIONS[nextOptionIndex]
+      });
+    }
+  };
+
   getActiveOptionMood = (): MoodAnalytics => {
     const { weekMood, monthMood, yearMood, allTimeMood } = this.props;
     const { activeOption } = this.state;
@@ -63,21 +86,26 @@ export default class AnalyticsScreen extends React.Component<Props> {
 
     return (
       <Screen>
-        <Topbar
-          options={TOPBAR_OPTIONS}
-          active={activeOption}
-          onOptionPress={this.setActiveOption}
-        />
+        <GestureRecognizer
+          onSwipeLeft={this.activateNextOption}
+          onSwipeRight={this.activatePreviousOption}
+        >
+          <Topbar
+            options={TOPBAR_OPTIONS}
+            active={activeOption}
+            onOptionPress={this.setActiveOption}
+          />
 
-        <FlatList
-          data={Object.entries(activeOptionMood)}
-          keyExtractor={([mood, _]) => mood}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.contentView}
-          renderItem={({ item: [mood, count] }) => (
-            <Bar mood={mood} count={count} totalCount={totalCount} />
-          )}
-        />
+          <FlatList
+            data={Object.entries(activeOptionMood)}
+            keyExtractor={([mood, _]) => mood}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.contentView}
+            renderItem={({ item: [mood, count] }) => (
+              <Bar mood={mood} count={count} totalCount={totalCount} />
+            )}
+          />
+        </GestureRecognizer>
       </Screen>
     );
   }
