@@ -44,11 +44,15 @@ export default class MainScreen extends React.Component<Props> {
   }
 
   handlePreviousYearChange = () => {
-    this.setState({ activeYear: this.state.activeYear - 1, activeMonth: 1 });
+    const activeYear = this.state.activeYear - 1;
+    const activeMonth = activeYear === this.now.year ? this.now.month : 1;
+    this.setState({ activeYear, activeMonth });
   };
 
   handleNextYearChange = () => {
-    this.setState({ activeYear: this.state.activeYear + 1, activeMonth: 1 });
+    const activeYear = this.state.activeYear + 1;
+    const activeMonth = activeYear === this.now.year ? this.now.month : 1;
+    this.setState({ activeYear, activeMonth });
   };
 
   render() {
