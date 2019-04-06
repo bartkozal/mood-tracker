@@ -12,6 +12,7 @@
     "object-literal-sort-keys": false,
     "member-access": false,
     "ordered-imports": false,
-    "jsx-boolean-value": false
+    "jsx-boolean-value": false,
+    "no-shadowed-variable": false
   }
 }

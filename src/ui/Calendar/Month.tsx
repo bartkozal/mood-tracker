@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
     marginBottom: 16
   },
   monthNameView: {
-    marginBottom: 16
+    marginBottom: 16,
+    marginLeft: 8
   },
   monthDaysView: {
     flexDirection: "row",

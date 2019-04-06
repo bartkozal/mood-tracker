@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { LinearGradient } from "expo";
 import { Gradient } from "./Color";
@@ -10,7 +9,7 @@ export default class Screen extends React.Component {
       <SafeAreaView>
         <LinearGradient
           colors={Gradient.Background}
-          style={{ paddingHorizontal: 12 }}
+          style={{ paddingHorizontal: 8 }}
         >
           {this.props.children}
         </LinearGradient>

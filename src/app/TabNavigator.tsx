@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.Sky
   },
   tabBar: {
-    paddingTop: 11,
-    borderTopWidth: 0
+    borderTopWidth: 0,
+    height: 64
   }
 });
