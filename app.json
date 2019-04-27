@@ -3,7 +3,7 @@
     "name": "Mood Tracker",
     "slug": "mood-tracker",
     "privacy": "unlisted",
-    "description": "Track your mood over the year",
+    "description": "Track daily mood with emojis",
     "githubUrl": "https://github.com/brtjkzl/mood-tracker",
     "sdkVersion": "32.0.0",
     "platforms": ["ios", "android"],
