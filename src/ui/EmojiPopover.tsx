@@ -52,7 +52,16 @@ const styles = StyleSheet.create({
   popover: {
     borderRadius: 12,
     padding: 8,
-    backgroundColor: Color.White
+    backgroundColor: Color.White,
+    overflow: "visible",
+    shadowColor: "rgba(0, 0, 0, 0.3)",
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowOpacity: 1,
+    shadowRadius: 30,
+    elevation: 10
   },
   arrow: {
     width: 29,
