@@ -6021,10 +6021,10 @@ react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
 
-react-native-popover-view@^1.0.17:
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/react-native-popover-view/-/react-native-popover-view-1.0.17.tgz#72cbecd1f3a378e703fc7ac93f7f02c2990ca76e"
-  integrity sha512-7paPrbQ3IsWkfS8XfypVV9NZ7LdpfgzuqDE3KysvtkXx8qBEwKfm3/knJiGjjHPqs6eUcfudoBylL+bl5p1cww==
+react-native-popover-view@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-popover-view/-/react-native-popover-view-2.0.1.tgz#2c0123fdaa98fba539e3037bec4f035b41d54c16"
+  integrity sha512-Ahq7MhPoa3yJn3x3S95pneJpqF0tMMO8z98h3H7JXU6g9yBQfUkN2haodRt6l/D055LzSGYdv/cpgZKTOOBZKw==
   dependencies:
     react-native-safe-area-view "^0.10.0"
 

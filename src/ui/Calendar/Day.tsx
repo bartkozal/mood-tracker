@@ -33,7 +33,7 @@ export default class Day extends React.Component<Props> {
 
   setMood = (dayDateTime: DateTime, mood: string) => {
     this.props.onDayMoodChange(dayDateTime.toISODate(), mood);
-    this.setState({ isPopoverVisible: false });
+    this.setIsPopoverVisible(false);
   };
 
   render() {

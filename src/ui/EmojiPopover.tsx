@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { TouchableOpacity, StyleSheet, View, Platform } from "react-native";
 import Popover from "react-native-popover-view";
 import Color from "./Color";
 import Emoji, { EmojiList } from "./Emoji";
@@ -20,9 +20,9 @@ export default class EmojiPopover extends React.Component<Props> {
       <Popover
         isVisible={isVisible}
         fromView={fromView}
-        onClose={onClose}
+        onRequestClose={onClose}
         placement="auto"
-        showBackground={false}
+        backgroundStyle={styles.backdrop}
         arrowStyle={styles.arrow}
         popoverStyle={styles.popover}
         animationConfig={{ duration: 100 }}
@@ -66,5 +66,8 @@ const styles = StyleSheet.create({
   arrow: {
     width: 29,
     height: 14
+  },
+  backdrop: {
+    backgroundColor: "transparent"
   }
 });
