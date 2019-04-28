@@ -2,7 +2,7 @@
   "expo": {
     "name": "Mood Tracker",
     "slug": "mood-tracker",
-    "privacy": "unlisted",
+    "privacy": "public",
     "description": "Track daily mood with emojis",
     "githubUrl": "https://github.com/brtjkzl/mood-tracker",
     "sdkVersion": "32.0.0",
